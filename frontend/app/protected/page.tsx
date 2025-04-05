@@ -1,4 +1,3 @@
-import FetchDataSteps from "@/components/tutorial/fetch-data-steps";
 import { createClient } from "@/utils/supabase/server";
 import { WordOfTheDay } from "@/utils/types";
 import { getWordOfTheDay } from "@/utils/word_of_the_day";
