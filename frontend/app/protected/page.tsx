@@ -3,7 +3,16 @@ import { WordOfTheDay } from "@/utils/types";
 import { getWordOfTheDay } from "@/utils/word_of_the_day";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "@/components/ui/separator";
 import { updateProfile } from "../actions/profile";
 
 export default async function ProtectedPage() {
@@ -27,40 +36,59 @@ export default async function ProtectedPage() {
     .single();
 
   return (
-    <div className="flex-1 w-full flex flex-col gap-12">
-      {/* Display the word of the day information */}
-      <div className="flex flex-col gap-4">
-        <h1 className="text-3xl font-bold">Word of the Day</h1>
-        <div className="flex gap-4">
-          <InfoIcon size={24} />
-          <p>
-            {word ? (
-              <>
-                <strong>{word.word}</strong>: {word.definition}
-              </>
-            ) : (
-              "No word of the day available."
-            )}
-          </p>
-        </div>
-      </div>
+    <div className="container mx-auto py-8 max-w-4xl">
+      <div className="space-y-6">
+        {/* Display the word of the day information */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Word of the Day</CardTitle>
+            <CardDescription>
+              Expand your vocabulary with a new word every day
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-start gap-4">
+              <InfoIcon className="text-primary h-5 w-5 mt-0.5" />
+              <div className="space-y-1">
+                {word ? (
+                  <>
+                    <p className="font-semibold text-xl">{word.word}</p>
+                    <p className="text-muted-foreground">{word.definition}</p>
+                  </>
+                ) : (
+                  <p className="text-muted-foreground italic">
+                    No word of the day available.
+                  </p>
+                )}
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-      {/* Profile Form */}
-      <div className="flex flex-col gap-4">
-        <h2 className="text-2xl font-bold">Your Profile</h2>
-        <form action={updateProfile} className="flex flex-col gap-4 max-w-md">
-          <Input
-            name="content"
-            defaultValue={profile?.content || ""}
-            placeholder="Enter your profile content"
-          />
-          <button
-            type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-          >
-            Save Profile
-          </button>
-        </form>
+        <Separator className="my-8" />
+
+        {/* Profile Form */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Your Profile</CardTitle>
+            <CardDescription>
+              Tell us about yourself to improve word generation.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form action={updateProfile} className="space-y-4">
+              <Textarea
+                name="content"
+                defaultValue={profile?.content || ""}
+                placeholder="Tell us about yourself..."
+                className="min-h-[120px]"
+              />
+              <div className="flex justify-end">
+                <Button type="submit">Save Changes</Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
