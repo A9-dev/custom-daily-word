@@ -21,9 +21,9 @@ export default async function ProtectedPage() {
 
   // Get user's profile
   const { data: profile } = await supabase
-    .from('profiles')
-    .select('content')
-    .eq('user_id', user.id)
+    .from("profiles")
+    .select("content")
+    .eq("user_id", user.id)
     .single();
 
   return (
@@ -51,7 +51,7 @@ export default async function ProtectedPage() {
         <form action={updateProfile} className="flex flex-col gap-4 max-w-md">
           <Input
             name="content"
-            defaultValue={profile?.content || ''}
+            defaultValue={profile?.content || ""}
             placeholder="Enter your profile content"
           />
           <button
