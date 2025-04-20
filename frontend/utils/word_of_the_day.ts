@@ -63,7 +63,6 @@ export async function getWordOfTheDay(
       previousWords?.map((item) => item.word) || []
     );
 
-    console.log("Generated word:", word);
     // Insert and return new word
     const { data: newWord, error: insertError } = await supabase
       .from("words")
