@@ -8,7 +8,7 @@ import OpenAI from "openai";
  * @returns Promise resolving to the word of the day or null if an error occurs
  */
 export async function getWordOfTheDay(
-  supabase: SupabaseClient
+  supabase: SupabaseClient,
 ): Promise<WordOfTheDay | null> {
   try {
     // Get authenticated user
@@ -60,7 +60,7 @@ export async function getWordOfTheDay(
     const word = await generateNewWord(
       today,
       profile.content,
-      previousWords?.map((item) => item.word) || []
+      previousWords?.map((item) => item.word) || [],
     );
 
     // Insert and return new word
@@ -81,7 +81,7 @@ export async function getWordOfTheDay(
   } catch (error) {
     console.error(
       "Error in getWordOfTheDay:",
-      error instanceof Error ? error.message : error
+      error instanceof Error ? error.message : error,
     );
     return null;
   }
@@ -93,7 +93,7 @@ export async function getWordOfTheDay(
 async function generateNewWord(
   date: string,
   userContent: string,
-  previousWords: string[]
+  previousWords: string[],
 ): Promise<{ word: string; definition: string }> {
   if (!process.env.OPENAI_API_KEY) {
     throw new Error("OpenAI API key not found in environment variables");
@@ -130,7 +130,7 @@ DEFINITION: [the definition]`;
   // Parse response
   const wordMatch = generatedContent.match(/WORD:\s*(.*?)(?:\n|$)/i);
   const definitionMatch = generatedContent.match(
-    /DEFINITION:\s*(.*?)(?:\n|$)/i
+    /DEFINITION:\s*(.*?)(?:\n|$)/i,
   );
 
   const word = wordMatch?.[1]?.trim();
@@ -138,7 +138,7 @@ DEFINITION: [the definition]`;
 
   if (!word || !definition) {
     throw new Error(
-      `Failed to parse word and definition from API response: ${generatedContent}`
+      `Failed to parse word and definition from API response: ${generatedContent}`,
     );
   }
 
