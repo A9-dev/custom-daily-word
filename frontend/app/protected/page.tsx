@@ -35,11 +35,14 @@ export default async function ProtectedPage() {
     .eq("user_id", user.id)
     .single();
 
+  const cardStyles =
+    "bg-[rgba(255,255,255,0.2)] rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5px] border border-[rgba(255,255,255,0.3)]";
+
   return (
     <div className="container mx-auto py-8 max-w-4xl">
       <div className="space-y-6">
         {/* Display the word of the day information */}
-        <Card>
+        <Card className={cardStyles}>
           <CardHeader>
             <CardTitle>Word of the Day</CardTitle>
             <CardDescription>
@@ -68,7 +71,7 @@ export default async function ProtectedPage() {
         <Separator className="my-8" />
 
         {/* Profile Form */}
-        <Card>
+        <Card className={cardStyles}>
           <CardHeader>
             <CardTitle>Your Profile</CardTitle>
             <CardDescription>
@@ -81,7 +84,7 @@ export default async function ProtectedPage() {
                 name="content"
                 defaultValue={profile?.content || ""}
                 placeholder="Tell us about yourself..."
-                className="min-h-[120px]"
+                className="min-h-[120px] resize-none bg-transparent"
               />
               <div className="flex justify-end">
                 <Button type="submit">Save Changes</Button>
