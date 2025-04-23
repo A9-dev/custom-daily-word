@@ -36,7 +36,7 @@ export default async function ProtectedPage() {
     .single();
 
   const cardStyles =
-    "bg-[rgba(255,255,255,0.2)] rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[5px] border border-[rgba(255,255,255,0.3)]";
+    "bg-[rgba(255,255,255,0.2)] rounded-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[10px] border border-[rgba(255,255,255,0.3)]";
 
   return (
     <div className="container mx-auto py-8 max-w-4xl">
