@@ -44,8 +44,16 @@ export default function RootLayout({
               {children}
             </div>
 
-            <footer className="w-full flex items-center justify-center border-t border-[rgba(255,255,255,0.3)] mx-auto text-center text-xs py-16 h-32 bg-[rgba(255,255,255,0.2)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[10px]">
-              Made by A9-dev
+            <footer className="w-full flex items-center justify-center border-t border-[rgba(255,255,255,0.3)] mx-auto text-xs py-16 h-32 bg-[rgba(255,255,255,0.1)] shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-[10px]">
+              Made by&nbsp;
+              <a
+                href="https://github.com/A9-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              >
+                A9-dev
+              </a>
             </footer>
           </main>
         </ThemeProvider>
