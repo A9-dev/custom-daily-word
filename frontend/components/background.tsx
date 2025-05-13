@@ -20,11 +20,13 @@ export default function Background() {
     canvas.height = height;
 
     const fontSize = 16;
-    const columns = Math.floor(width / fontSize);
-    const drops: number[] = Array(columns).fill(1);
+    let columns = Math.floor(width / fontSize);
+    let drops: number[] = Array.from({ length: columns }, () =>
+      Math.floor((Math.random() * height) / fontSize)
+    );
 
     const characters = Array.from(
-      "日アスカ字文語에한글中ЧЖФЁабвΣΨΩנמשאב😃§ΩЖλ⻘漢字πµ"
+      "日アスカ字文語에한글中ЧЖФЁабвΣΨΩנמשאב§ΩЖλ⻘漢字πµ"
     );
 
     function draw() {
@@ -53,6 +55,12 @@ export default function Background() {
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
+
+      // Update columns and drops array
+      columns = Math.floor(width / fontSize);
+      drops = Array.from({ length: columns }, () =>
+        Math.floor((Math.random() * height) / fontSize)
+      );
     };
 
     window.addEventListener("resize", handleResize);
