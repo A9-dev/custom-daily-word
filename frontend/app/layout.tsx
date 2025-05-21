@@ -3,7 +3,6 @@ import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import HeaderAuth from "@/components/header-auth";
 
-
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -25,9 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.className} bg-background`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${geistSans.className} bg-background`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-background text-foreground">
-
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
@@ -40,7 +42,7 @@ export default function RootLayout({
                 <HeaderAuth />
               </div>
             </nav>
-            <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 mx-auto w-full">
+            <div className="flex-1 flex flex-col gap-20 max-w-5xl p-8 mx-auto w-full">
               {children}
             </div>
 

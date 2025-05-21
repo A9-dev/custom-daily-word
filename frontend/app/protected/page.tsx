@@ -37,7 +37,7 @@ export default async function ProtectedPage() {
     .single();
 
   const cardStyles =
-    "bg-card border-4 border-black p-8 shadow-[12px_12px_0_0_rgba(0,0,0,1)] -rotate-2 hover:rotate-0 transition-transform";
+    "bg-card border-4 border-black p-8 shadow-[12px_12px_0_0_rgba(0,0,0,1)]";
 
   return (
     <div className="container mx-auto py-12 max-w-4xl">
@@ -45,7 +45,7 @@ export default async function ProtectedPage() {
         {/* Display the word of the day information */}
         <div className="flex flex-col gap-12 w-full max-w-5xl mx-auto">
           <Card className={cardStyles}>
-            <CardTitle className="text-5xl font-black uppercase tracking-tight rotate-1 text-primary mb-6">
+            <CardTitle className="text-5xl font-black uppercase tracking-tight text-primary mb-6">
               Word of the Day
             </CardTitle>
             <CardDescription className="text-2xl font-black tracking-wide">
@@ -59,11 +59,11 @@ export default async function ProtectedPage() {
           </Card>
         </div>
 
-        <Separator className="my-12 h-0.5 bg-black rotate-1" />
+        <Separator className="my-12 h-0.5 bg-black" />
 
         {/* Profile Form */}
         <Card className={cardStyles}>
-          <CardTitle className="text-5xl font-black uppercase tracking-tight rotate-1 text-secondary mb-6">
+          <CardTitle className="text-5xl font-black uppercase tracking-tight text-secondary mb-6">
             Your Profile
           </CardTitle>
           <CardContent className="p-0 mt-6">
@@ -71,7 +71,7 @@ export default async function ProtectedPage() {
               <div className="flex flex-col gap-4">
                 <Label
                   htmlFor="content"
-                  className="text-2xl font-black uppercase tracking-wide rotate-1"
+                  className="text-2xl font-black uppercase tracking-wide"
                 >
                   About You
                 </Label>
@@ -79,7 +79,7 @@ export default async function ProtectedPage() {
                   name="content"
                   placeholder="Write something awesome about yourself!"
                   defaultValue={profile?.content || ""}
-                  className="text-lg"
+                  className="text-lg resize-none"
                 />
               </div>
               <Button
