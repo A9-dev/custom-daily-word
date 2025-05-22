@@ -4,6 +4,7 @@ import { getWordOfTheDay } from "@/utils/word_of_the_day";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -35,57 +36,58 @@ export default async function ProtectedPage() {
     .eq("user_id", user.id)
     .single();
 
-  return (
-    <div className="container mx-auto py-8 max-w-4xl">
-      <div className="space-y-6">
-        {/* Display the word of the day information */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Word of the Day</CardTitle>
-            <CardDescription>
-              Expand your vocabulary with a new word every day
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-start gap-4">
-              <InfoIcon className="text-primary h-5 w-5 mt-0.5" />
-              <div className="space-y-1">
-                {word ? (
-                  <>
-                    <p className="font-semibold text-xl">{word.word}</p>
-                    <p className="text-muted-foreground">{word.definition}</p>
-                  </>
-                ) : (
-                  <p className="text-muted-foreground italic">
-                    No word of the day available.
-                  </p>
-                )}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+  const cardStyles =
+    "bg-card border-4 border-black p-8 shadow-[12px_12px_0_0_rgba(0,0,0,1)]";
 
-        <Separator className="my-8" />
+  return (
+    <div className="container mx-auto py-12 max-w-4xl">
+      <div className="space-y-12">
+        {/* Display the word of the day information */}
+        <div className="flex flex-col gap-12 w-full max-w-5xl mx-auto">
+          <Card className={cardStyles}>
+            <CardTitle className="text-5xl font-black uppercase tracking-tight text-primary mb-6">
+              Word of the Day
+            </CardTitle>
+            <CardDescription className="text-2xl font-black tracking-wide">
+              {word?.word || "No word found"}
+            </CardDescription>
+            <CardContent className="p-0 mt-6">
+              <p className="text-xl font-medium">
+                {word?.definition || "No description found"}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Separator className="my-12 h-0.5 bg-black" />
 
         {/* Profile Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Profile</CardTitle>
-            <CardDescription>
-              Tell us about yourself to improve word generation.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form action={updateProfile} className="space-y-4">
-              <Textarea
-                name="content"
-                defaultValue={profile?.content || ""}
-                placeholder="Tell us about yourself..."
-                className="min-h-[120px]"
-              />
-              <div className="flex justify-end">
-                <Button type="submit">Save Changes</Button>
+        <Card className={cardStyles}>
+          <CardTitle className="text-5xl font-black uppercase tracking-tight text-secondary mb-6">
+            Your Profile
+          </CardTitle>
+          <CardContent className="p-0 mt-6">
+            <form action={updateProfile} className="flex flex-col gap-6">
+              <div className="flex flex-col gap-4">
+                <Label
+                  htmlFor="content"
+                  className="text-2xl font-black uppercase tracking-wide"
+                >
+                  About You
+                </Label>
+                <Textarea
+                  name="content"
+                  placeholder="Write something awesome about yourself!"
+                  defaultValue={profile?.content || ""}
+                  className="text-lg resize-none"
+                />
               </div>
+              <Button
+                type="submit"
+                className="bg-accent text-accent-foreground text-xl py-6"
+              >
+                Save Profile
+              </Button>
             </form>
           </CardContent>
         </Card>

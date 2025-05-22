@@ -12,7 +12,9 @@ export default async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      <p className="font-black text-lg uppercase tracking-wide">
+        Hey <span className="text-secondary">{user.email}</span>!
+      </p>
       <form action={signOutAction}>
         <Button type="submit" variant={"outline"}>
           Sign out
@@ -22,10 +24,20 @@ export default async function AuthButton() {
   ) : (
     <div className="flex gap-2">
       <Button asChild size="sm" variant={"outline"}>
-        <Link href="/sign-in">Sign in</Link>
+        <Link
+          href="/sign-in"
+          className="text-foreground font-black uppercase tracking-wide hover:text-primary transition-colors"
+        >
+          Sign in
+        </Link>
       </Button>
       <Button asChild size="sm" variant={"default"}>
-        <Link href="/sign-up">Sign up</Link>
+        <Link
+          href="/sign-up"
+          className="text-foreground font-black uppercase tracking-wide hover:text-primary transition-colors"
+        >
+          Sign up
+        </Link>
       </Button>
     </div>
   );
