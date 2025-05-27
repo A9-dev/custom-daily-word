@@ -11,8 +11,8 @@ export default async function AuthButton() {
   } = await supabase.auth.getUser();
 
   return user ? (
-    <div className="flex items-center gap-4">
-      <p className="font-black text-lg uppercase tracking-wide">
+    <div className="flex w-full justify-between items-center">
+      <p className="font-black text-lg uppercase tracking-wide bg-white border-4 border-black rounded-3xl px-3 py-1 rotate-1">
         Hey <span className="text-secondary">{user.email}</span>!
       </p>
       <form action={signOutAction}>

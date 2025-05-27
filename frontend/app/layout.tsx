@@ -36,8 +36,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center bg-background">
-            <nav className="w-full flex justify-center bg-card border-b-4 border-black h-16 shadow-[0_6px_0_0_rgba(0,0,0,1)] -rotate-1">
+          <main className="min-h-screen flex flex-col items-center bg-background bg-grid">
+            <nav className="w-full flex justify-center items-center border-b-4 py-10 border-black h-16 shadow-[0_6px_0_0_rgba(0,0,0,1)] bg-cyan-100">
               <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
                 <HeaderAuth />
               </div>
@@ -46,13 +46,13 @@ export default function RootLayout({
               {children}
             </div>
 
-            <footer className="w-full flex items-center justify-center border-t-4 border-black mx-auto text-lg font-black py-16 h-32 bg-card shadow-[0_-6px_0_0_rgba(0,0,0,1)] rotate-1">
+            <footer className="w-full flex items-center justify-center border-t-4 border-black mx-auto text-lg font-black py-16 h-32 bg-cyan-100 shadow-[0_-6px_0_0_rgba(0,0,0,1)]">
               Made by&nbsp;
               <a
                 href="https://github.com/A9-dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 transition-colors font-black uppercase -rotate-2 hover:rotate-0 transition-transform"
+                className="text-primary hover:text-primary/80 font-black uppercase -rotate-2 hover:rotate-0 transition-transform"
               >
                 A9-dev
               </a>
