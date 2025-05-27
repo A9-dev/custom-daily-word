@@ -15,3 +15,6 @@
 - **Supabase** – Authentication & database
 - **OpenAI API** – Word generation
 - **Tailwind CSS** – Utility first CSS framework
+
+
+![image](https://github.com/user-attachments/assets/e2a9b9a4-f5f9-40a4-8d9a-2bfc7f72268f)
