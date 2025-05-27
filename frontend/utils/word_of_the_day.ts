@@ -2,6 +2,10 @@ import { SupabaseClient } from "@supabase/supabase-js";
 import { WordOfTheDay } from "./types";
 import OpenAI from "openai";
 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 /**
  * Retrieves or generates the word of the day for the current user
  * @param supabase - Supabase client instance
@@ -88,7 +92,7 @@ export async function getWordOfTheDay(
 }
 
 /**
- * Generates a new unique word using OpenAI
+ * Generates a new unique word using OpenAI with structured output
  */
 async function generateNewWord(
   date: string,
@@ -99,47 +103,61 @@ async function generateNewWord(
     throw new Error("OpenAI API key not found in environment variables");
   }
 
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-
   const previousWordsText = previousWords.length
     ? `Previous words: ${previousWords.join(", ")}.`
     : "No previous words.";
 
-  const prompt = `Produce a word of the day style word that would be intereseting to a user of the following profile. Produce a word that is real and don't change the definition at all to suit the user. The word should naturally interest the user. Make the word uncommon and specific to the user profile and their interests.
-${previousWordsText}
-User content: ${userContent}
-The word should be unique and not in the previous words list.
-Return it in this exact format:
-WORD: [the word]
-DEFINITION: [the definition]`;
+  const prompt = `Produce a unique 'word of the day' that would be interesting to this user, based on their profile. Do not repeat any previous words. The word must be real, uncommon, and contextually relevant.`;
 
   const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
-    max_completion_tokens: 100,
-    temperature: 0.7,
+    model: "gpt-4-0613", // or "gpt-3.5-turbo-0613"
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are a helpful assistant that returns unique and interesting words of the day.",
+      },
+      {
+        role: "user",
+        content: `${prompt}\n\n${previousWordsText}\n\nUser content: ${userContent}`,
+      },
+    ],
+    tools: [
+      {
+        type: "function",
+        function: {
+          name: "return_word",
+          description: "Returns a word and its definition",
+          parameters: {
+            type: "object",
+            properties: {
+              word: {
+                type: "string",
+                description: "The unique word being presented",
+              },
+              definition: {
+                type: "string",
+                description: "The definition of the word",
+              },
+            },
+            required: ["word", "definition"],
+          },
+        },
+      },
+    ],
+    tool_choice: { type: "function", function: { name: "return_word" } },
   });
 
-  const generatedContent = response.choices[0].message.content;
-  if (!generatedContent) {
-    throw new Error("OpenAI returned empty content");
+  const toolCall = response.choices[0]?.message?.tool_calls?.[0];
+  if (!toolCall || toolCall.function.name !== "return_word") {
+    throw new Error("Failed to get structured function call from OpenAI");
   }
 
-  // Parse response
-  const wordMatch = generatedContent.match(/WORD:\s*(.*?)(?:\n|$)/i);
-  const definitionMatch = generatedContent.match(
-    /DEFINITION:\s*(.*?)(?:\n|$)/i,
-  );
-
-  const word = wordMatch?.[1]?.trim();
-  const definition = definitionMatch?.[1]?.trim();
+  const args = JSON.parse(toolCall.function.arguments);
+  const { word, definition } = args;
 
   if (!word || !definition) {
-    throw new Error(
-      `Failed to parse word and definition from API response: ${generatedContent}`,
-    );
+    throw new Error("Missing word or definition in structured response");
   }
 
   return { word, definition };
