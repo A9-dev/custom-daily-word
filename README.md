@@ -15,5 +15,3 @@
 - **Supabase** – Authentication & database
 - **OpenAI API** – Word generation
 - **Tailwind CSS** – Utility first CSS framework
-
-Made by [A9-dev](https://github.com/A9-dev)
