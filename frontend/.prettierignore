@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+coverage
+*.log
+.env
+.next
+out
+public
+pnpm-lock.yaml
+README.md
