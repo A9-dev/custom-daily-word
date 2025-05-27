@@ -7,3 +7,5 @@ coverage
 .next
 out
 public
+pnpm-lock.yaml
+README.md
