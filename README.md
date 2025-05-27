@@ -4,16 +4,16 @@
 
 ## Features
 
-- Personalized "Word of the Day" for each user
+- Personalized "Word of the Day" for each user built with OpenAI
 - User authentication (sign up, sign in, sign out, password reset)
 - Profile management
-- Modern, neo-brutalist UI built with Next.js, Tailwind CSS, and Supabase
+- Modern, neo-brutalist UI
 
 ## Tech
 
 - **Next.js** - Web framework
 - **Supabase** – Authentication & database
 - **OpenAI API** – Word generation
-- **Tailwind CSS** – Custom brutalist theme for styling
+- **Tailwind CSS** – Utility first CSS framework
 
 Made by [A9-dev](https://github.com/A9-dev)
