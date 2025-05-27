@@ -11,8 +11,8 @@ export default async function AuthButton() {
   } = await supabase.auth.getUser();
 
   return user ? (
-    <div className="flex items-center gap-4">
-      <p className="font-black text-lg uppercase tracking-wide">
+    <div className="flex w-full justify-between items-center">
+      <p className="font-black text-lg uppercase tracking-wide bg-white border-4 border-black rounded-3xl px-3 py-1 rotate-1">
         Hey <span className="text-secondary">{user.email}</span>!
       </p>
       <form action={signOutAction}>
@@ -24,18 +24,12 @@ export default async function AuthButton() {
   ) : (
     <div className="flex gap-2">
       <Button asChild size="sm" variant={"outline"}>
-        <Link
-          href="/sign-in"
-          className="text-foreground font-black uppercase tracking-wide hover:text-primary transition-colors"
-        >
+        <Link href="/sign-in" className="link-button">
           Sign in
         </Link>
       </Button>
-      <Button asChild size="sm" variant={"default"}>
-        <Link
-          href="/sign-up"
-          className="text-foreground font-black uppercase tracking-wide hover:text-primary transition-colors"
-        >
+      <Button asChild size="sm" variant={"outline"}>
+        <Link href="/sign-up" className="link-button">
           Sign up
         </Link>
       </Button>
