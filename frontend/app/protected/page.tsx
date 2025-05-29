@@ -1,7 +1,6 @@
 import { createClient } from "@/utils/supabase/server";
 import { WordOfTheDay } from "@/utils/types";
-import { getWordOfTheDay } from "@/utils/word_of_the_day";
-import { InfoIcon } from "lucide-react";
+import { getWordOfTheDay } from "@/utils/wordOfTheDay";
 import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
