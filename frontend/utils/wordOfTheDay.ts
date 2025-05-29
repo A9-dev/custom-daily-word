@@ -107,7 +107,7 @@ async function generateNewWord(
     ? `Previous words: ${previousWords.join(", ")}.`
     : "No previous words.";
 
-  const prompt = `Produce a unique 'word of the day' that would be interesting to this user, based on their profile. Do not repeat any previous words. The word must be real, uncommon, and contextually relevant.`;
+  const prompt = `Produce a unique 'word of the day' that would be interesting to this user, based on their profile. Do not repeat any previous words. Choose an uncommon but valuable word that would expand someone's vocabulary.`;
 
   const response = await openai.chat.completions.create({
     model: "gpt-4-0613", // or "gpt-3.5-turbo-0613"
@@ -115,7 +115,7 @@ async function generateNewWord(
       {
         role: "system",
         content:
-          "You are a helpful assistant that returns unique and interesting words of the day.",
+          "You are a vocabulary expert. You are a helpful assistant that returns unique and interesting words of the day.",
       },
       {
         role: "user",
