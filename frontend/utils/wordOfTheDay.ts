@@ -62,7 +62,6 @@ export async function getWordOfTheDay(
 
     // Generate new word using OpenAI
     const word = await generateNewWord(
-      today,
       profile.content,
       previousWords?.map((item) => item.word) || [],
     );
@@ -94,8 +93,7 @@ export async function getWordOfTheDay(
 /**
  * Generates a new unique word using OpenAI with structured output
  */
-async function generateNewWord(
-  date: string,
+export async function generateNewWord(
   userContent: string,
   previousWords: string[],
 ): Promise<{ word: string; definition: string }> {
